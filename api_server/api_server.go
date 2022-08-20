@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -42,6 +43,41 @@ func getHandler(w http.ResponseWriter, req *http.Request) {
 
 }
 
+type Adapter func(http.Handler) http.Handler
+
+func Wrap() Adapter {
+	return func(h http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			log.Println("before")
+			defer log.Println("after")
+			h.ServeHTTP(w, r)
+		})
+	}
+}
+
+//func Adapt(handler http.Handler, adapters ...Adapter) http.Handler {
+//
+//	for _, adapter := range adapters {
+//		handler = adapter.Wrap(handler)
+//	}
+//}
+type Logger struct {
+	handler http.Handler
+}
+
+//ServeHTTP handles the request by passing it to the real
+//handler and logging the request details
+func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
+	l.handler.ServeHTTP(w, r)
+	log.Printf("%s %s %v", r.Method, r.URL.Path, time.Since(start))
+}
+
+//NewLogger constructs a new Logger middleware handler
+func NewLogger(handlerToWrap http.Handler) *Logger {
+	return &Logger{handlerToWrap}
+}
+
 func main() {
 	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
 
@@ -55,10 +91,13 @@ func main() {
 	actionsCount, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
 	checkError(err)
 
-	http.HandleFunc("/get", getHandler)
-	http.HandleFunc("/post", postHandler)
-	http.HandleFunc("/delete", deleteHandler)
-	go http.ListenAndServe(portSuffix, nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/get", getHandler)
+	mux.HandleFunc("/post", postHandler)
+	mux.HandleFunc("/delete", deleteHandler)
+	wrappedMux := NewLogger(mux)
+
+	go http.ListenAndServe(portSuffix, wrappedMux)
 	time.Sleep(100 * time.Millisecond)
 
 	var actions []string
