@@ -28,7 +28,7 @@ public class card {
             }
         }
         int max = -1;
-        for (Map.Entry mapElement : cMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> mapElement : cMap.entrySet()) {
             if ((Integer) mapElement.getValue() == 1)  {
                 max = Math.max(max, (Integer)mapElement.getKey());
             }

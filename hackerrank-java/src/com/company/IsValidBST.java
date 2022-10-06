@@ -73,7 +73,7 @@ public class IsValidBST {
     {
         // Stores root node and left
         // subtree of each node
-        Stack<TreeNode > Stack = new Stack< >();
+        Stack<TreeNode > stack = new Stack< >();
 
         // Stores previous visited node
         TreeNode prev = null;
@@ -82,24 +82,24 @@ public class IsValidBST {
         //                5
         //          4               7
         //                    6           8
-        while (!Stack.isEmpty() ||
+        while (!stack.isEmpty() ||
                 root != null) {
 
             // Traverse left subtree
             while (root != null) {
 
                 // Insert root into Stack
-                Stack.add(root);
+                stack.add(root);
 
                 // Update root
                 root = root.left;
             }
 
             // Stores top element of Stack
-            root = Stack.peek();
+            root = stack.peek();
 
             // Remove the top element of Stack
-            Stack.pop();
+            stack.pop();
 
             // If data value of root node less
             // than data value of left subtree

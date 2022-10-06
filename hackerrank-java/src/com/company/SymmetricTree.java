@@ -55,8 +55,6 @@ public class SymmetricTree {
             }
 
             stack.push(isLeftOriented ? current.left: current.right );
-
-            TreeNode secondChild = isLeftOriented? current.right: current.left;
             stack.push(isLeftOriented ? current.right: current.left );
 
 

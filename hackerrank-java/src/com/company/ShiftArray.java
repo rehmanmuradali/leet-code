@@ -3,7 +3,7 @@ package com.company;
 import java.util.Arrays;
 
 public class ShiftArray {
-    public static void rotate(int[] nums, int i, int j) {
+    public static void reverse(int[] nums, int i, int j) {
         while(i < j) {
             int temp = nums[i];
             nums[i++] = nums[j];
@@ -15,9 +15,9 @@ public class ShiftArray {
         if(k > n)
             k %= n;
 
-        rotate(nums, 0, n - 1);
-        rotate(nums, 0, k - 1);
-        rotate(nums, k, n - 1);
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
     }
     public static void main(String[] args) {
         int[] arr = new int[]{1,2,3,4,5,6,7};

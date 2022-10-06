@@ -33,10 +33,10 @@ public class MinContinuousUnique {
     }
 
     public static void main(String[] args) {
-        //System.out.println(solution(new int[]{2,1,1,3,2,1,1,3}));
+        System.out.println(solution(new int[]{2,1,1,3,2,1,1,3}));
 
         //System.out.println(solution(new int[]{7,5,2,7,2,7,4,7}));
-        System.out.println(solution(new int[]{7,7,7}));
+        //System.out.println(solution(new int[]{7,7,7}));
     }
 }
 

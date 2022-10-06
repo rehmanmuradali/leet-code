@@ -9,11 +9,10 @@ func main() {
 	print(myAtoi("-0012a42"))
 }
 
-
 func myAtoi(s string) int {
 	num := int64(0)
 	s = strings.TrimSpace(s)
-	if len(s) <= 0  {
+	if len(s) <= 0 {
 		return 0
 	}
 	mul := 1
@@ -27,11 +26,11 @@ func myAtoi(s string) int {
 	for _, b := range s {
 		diff := b - '0'
 		if diff > 9 || diff < 0 {
-			return int(num)*mul
+			return int(num) * mul
 		}
 		num = num*10 + int64(diff)
 		if mul < 0 {
-			if num > math.MaxInt32 + 1 {
+			if num > math.MaxInt32+1 {
 				return math.MinInt32
 			}
 		} else {
@@ -40,7 +39,5 @@ func myAtoi(s string) int {
 			}
 		}
 	}
-	return int(num)*mul
+	return int(num) * mul
 }
-
-

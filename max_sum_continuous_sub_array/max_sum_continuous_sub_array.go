@@ -20,6 +20,7 @@ func maxSubArray(nums []int) int {
 		} else {
 			sum += nums[i]
 		}
+
 		max = int(math.Max(float64(max), float64(sum)))
 	}
 	return max

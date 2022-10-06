@@ -11,7 +11,15 @@ import (
 )
 
 // Time      Time     Ask     Bid    Market    Stock
+//  00:00:01  00:01   109.09 109.095 109.093    FXCM     1
+//  00:00:02  00:02   109.09 109.095 109.093    ABC      1
+//  00:00:03  00:03   109.09 109.095 109.093    ACX      1
+//  00:00:05  00:00   109.09 109.095 109.093    FXCM     2
+//  00:00:05  00:00   109.09 109.095 109.093    FXCM
 //  00:00:00  00:00   109.09 109.095 109.093    FXCM
+//  00:00:00  00:00   109.09 109.095 109.093    FXCM
+// ...
+//  23:59:59  00:00   109.09 109.095 109.093    FXCM
 
 //  // 1. Eliminate Storing 2nd field, as it is generated from 1st
 //  // 2. Keep 1st field in seconds of the day, at max it will be 60*60*24= 85400 seconds

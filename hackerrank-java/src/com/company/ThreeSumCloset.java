@@ -39,7 +39,7 @@ public class ThreeSumCloset {
 
 
     public static void main(String[] args) {
-        System.out.println(threeSumClosest(new int[]{1, 1, 1, 1}, 0 ));
+        System.out.println(threeSumClosest(new int[]{1, 1, 1, 3, 2,5,-1}, 0 ));
     }
 
 
